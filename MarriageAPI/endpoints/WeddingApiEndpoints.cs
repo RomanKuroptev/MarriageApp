@@ -52,7 +52,7 @@ public static class WeddingApiEndpoints
         });
 
         // add update endpoint
-        endpoints.MapPut("/guests/{id}", async (WeddingContext dbContext, int id, Guest guest) =>
+        endpoints.MapPut("/guests/{id}", async (WeddingContext dbContext, int id, GuestDto guest) =>
         {
             if (id != guest.Id)
             {
@@ -119,18 +119,6 @@ public static class WeddingApiEndpoints
         });
     }
 
-    // Existing methods...
-
-    public static void MapRSVPEndpoint(IEndpointRouteBuilder endpoints)
-    {
-        endpoints.MapPost("/rsvp", async (RSVP rsvp, WeddingContext context) =>
-        {
-            // Add your logic here to handle the RSVP
-            // For example, you might want to add the RSVP to a database
-            context.RSVPs.Add(rsvp);
-            await context.SaveChangesAsync();
-        });
-    }
     private static bool GuestExists(WeddingContext dbContext, int id)
     {
         return dbContext.Guests.Any(e => e.Id == id);

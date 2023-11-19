@@ -7,6 +7,6 @@ namespace MarriageAPI.Dto
         public string Name { get; set; }
         public string Email { get; set; }
         public bool IsAttending { get; set; }
-        public int PlusOneCount { get; set; }
+        public string FoodPreference { get; set; } 
     }
 }

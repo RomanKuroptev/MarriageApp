@@ -9,7 +9,8 @@ public static class GuestMapper
             Id = guestDto.Id,
             Name = guestDto.Name,
             Email = guestDto.Email,
-            RSVPCode = Guid.NewGuid().ToString() // Generate a new RSVP code here
+            RSVPCode = Guid.NewGuid().ToString(), // Generate a new RSVP code here
+            FoodPreference = guestDto.FoodPreference
         };
     }
 }

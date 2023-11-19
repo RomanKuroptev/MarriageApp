@@ -51,5 +51,4 @@ app.UseCors("AllowAllOrigins");
 WeddingApiEndpoints.MapWeddingEndpoint(app);
 WeddingApiEndpoints.MapCreateWeddingEndpoint(app);
 WeddingApiEndpoints.MapGuestsEndpoint(app);
-WeddingApiEndpoints.MapRSVPEndpoint(app);
 app.Run();

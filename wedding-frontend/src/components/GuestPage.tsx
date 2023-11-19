@@ -8,6 +8,8 @@ import './GuestPage.css';
 function GuestPage() {
   const { rsvpCode } = useParams();
 const [guest, setGuest] = useState<Guest | undefined>(undefined);
+const [attendance, setAttendance] = useState('');
+const [foodPreference, setFoodPreference] = useState('');
 
 useEffect(() => {
     const fetchGuest = async () => {
@@ -24,6 +26,21 @@ useEffect(() => {
     fetchGuest();
 }, [rsvpCode]);
 
+const handleSubmit = async (event: React.FormEvent) => {
+  event.preventDefault();
+
+  if (guest) {
+    const updatedGuest = { ...guest, isAttending: attendance === 'yes', foodPreference };
+
+    try {
+      const response = await MarriageApiService.putGuests(updatedGuest.id ?? 0, updatedGuest);
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+};
+
 if (!guest) {
   return <div className="text-center my-4">Loading...</div>;
 }
@@ -38,22 +55,20 @@ return (
     
 
         <h2>OSA</h2>
-        <form className="mb-3">
-          <div>
-            <label>
-              <input type="radio" value="yes" name="attendance" /> Ja, jag kan delta
-            </label>
-            <label>
-              <input type="radio" value="no" name="attendance" /> Nej, jag kan inte delta
-            </label>
-          </div>
+        <form className="mb-3" onSubmit={handleSubmit}>
+            <div>
+              <label>
+                <input type="radio" value="yes" name="attendance" onChange={e => setAttendance(e.target.value)} /> Ja, jag kan delta
+              </label>
+              <label>
+                <input type="radio" value="no" name="attendance" onChange={e => setAttendance(e.target.value)} /> Nej, jag kan inte delta
+              </label>
+            </div>
           <div>
             <label>
               Matpreferens:
               <select name="foodPreference">
-                <option value="noPreference">Ingen preferens</option>
-                <option value="vegetarian">Vegetarian</option>
-                <option value="vegan">Vegan</option>
+              <input type="text" value={foodPreference} onChange={e => setFoodPreference(e.target.value)} />
                 {/* Add more options as needed */}
               </select>
             </label>
