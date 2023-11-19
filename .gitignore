@@ -160,3 +160,4 @@ wwwroot/
 # .vs directory
 .vs/
 data/
+.vscode/
