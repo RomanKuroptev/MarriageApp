@@ -3,10 +3,11 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type GuestDto = {
-    id?: number;
-    name?: string | null;
-    email?: string | null;
+export type UpdateGuestDto = {
+    id: number;
+    name: string;
+    email: string;
     isAttending?: boolean;
-    plusOneCount?: number;
+    foodPreference?: string | null;
+    rsvpCode?: string | null;
 };

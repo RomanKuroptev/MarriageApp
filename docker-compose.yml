@@ -1,5 +1,18 @@
 version: '3.8'
 services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - mynetwork
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - marriageApi
+      - wedding-frontend
+
   db:
     image: postgres
     environment:
@@ -27,7 +40,7 @@ services:
       - db
 
   marriageApi:
-    image: marriageapi:dev
+    image: ghcr.io/romankuroptev/marriageapi:dev
     build:
       context: .
       dockerfile: Dockerfile
@@ -42,6 +55,7 @@ services:
       - db
 
   wedding-frontend:
+    image: ghcr.io/romankuroptev/marriageapp-wedding-frontend:latest
     build:
       context: ./wedding-frontend
       dockerfile: Dockerfile
@@ -55,6 +69,7 @@ services:
       - ./wedding-frontend/node_modules:/app/node_modules
     environment:
       - CHOKIDAR_USEPOLLING=true
+      - REACT_APP_BASE_URL=http://localhost:8080
 
 networks:
   mynetwork:

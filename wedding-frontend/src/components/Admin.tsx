@@ -1,6 +1,7 @@
 // Admin.tsx
 import React, { useState, useEffect } from 'react';
-import { Guest } from '../apiClient/models/Guest'; // replace './Guest' with the correct path to the Guest module
+import { Guest } from '../apiClient'; // replace './Guest' with the correct path to the Guest module
+import { CreateGuestDto } from '../apiClient'; // replace './Guest' with the correct path to the Guest module
 import { MarriageApiService } from '../apiClient/services/MarriageApiService'; // replace './MarriageApiService' with the correct path to the MarriageApiService module
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -21,7 +22,10 @@ function Admin() {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
   
-    const guest = { name, email};
+    const guest: CreateGuestDto = {
+      name,
+      // Add other properties required by CreateGuestDto here
+    };
   
     try {
       const newGuest = await MarriageApiService.postGuests(guest);
@@ -44,10 +48,6 @@ function Admin() {
           <label className="form-label">Name:</label>
           <input type="text" className="form-control" value={name} onChange={e => setName(e.target.value)} />
         </div>
-        <div className="mb-3">
-          <label className="form-label">Email:</label>
-          <input type="text" className="form-control" value={email} onChange={e => setEmail(e.target.value)} />
-        </div>
         <button type="submit" className="btn btn-primary">Add Guest</button>
       </form>
 
@@ -58,6 +58,8 @@ function Admin() {
             <th>Name</th>
             <th>Email</th>
             <th>CODE</th>
+            <th>Attending</th>
+            <th>FoodPrefrence</th>
           </tr>
         </thead>
         <tbody>
@@ -66,6 +68,8 @@ function Admin() {
               <td>{guest.name}</td>
               <td>{guest.email}</td>
               <td>{guest.rsvpCode}</td>
+              <td>{guest.isAttending ? 'Yes' : 'No'}</td>
+              <td>{guest.foodPreference}</td>
             </tr>
           ))}
         </tbody>

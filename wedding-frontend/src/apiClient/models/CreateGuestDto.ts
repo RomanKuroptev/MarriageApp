@@ -3,8 +3,6 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type Wedding = {
-    id?: number;
-    venue?: string | null;
-    date?: string;
+export type CreateGuestDto = {
+    name: string;
 };

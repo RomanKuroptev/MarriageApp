@@ -7,9 +7,8 @@ export { CancelablePromise, CancelError } from './core/CancelablePromise';
 export { OpenAPI } from './core/OpenAPI';
 export type { OpenAPIConfig } from './core/OpenAPI';
 
+export type { CreateGuestDto } from './models/CreateGuestDto';
 export type { Guest } from './models/Guest';
-export type { GuestDto } from './models/GuestDto';
-export type { RSVP } from './models/RSVP';
-export type { Wedding } from './models/Wedding';
+export type { UpdateGuestDto } from './models/UpdateGuestDto';
 
 export { MarriageApiService } from './services/MarriageApiService';

@@ -2,30 +2,17 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using MarriageAPI.Dto;
+using MarriageAPI.dto;
 
 public static class WeddingApiEndpoints
 {
-    public static void MapWeddingEndpoint(IEndpointRouteBuilder endpoints)
-    {
-        endpoints.MapGet("/wedding", async (WeddingContext dbContext) =>
-        {
-            var wedding = await dbContext.Weddings.FirstOrDefaultAsync();
-            if (wedding == null)
-            {
-                return Results.NotFound();
-            }
-
-            return Results.Ok(wedding);
-        });
-    }
-
     public static void MapGuestsEndpoint(IEndpointRouteBuilder endpoints)
     {
         endpoints.MapGet("/guests", async (WeddingContext dbContext) =>
         {
-            var guests = await dbContext.Guests.ToListAsync();
+            List<Guest> guests = await dbContext.Guests.ToListAsync();
             return Results.Ok(guests);
-        });
+        }).Produces<List<Guest>>();
 
         // add crud endpoints for guests
         endpoints.MapGet("/guests/{id}", async (WeddingContext dbContext, int id) =>
@@ -37,7 +24,7 @@ public static class WeddingApiEndpoints
             }
 
             return Results.Ok(guest);
-        });
+        }).Produces<Guest>();
 
         endpoints.MapGet("/guests/rsvp/{rsvpCode}", async (WeddingContext dbContext, string rsvpCode) =>
         {
@@ -49,17 +36,32 @@ public static class WeddingApiEndpoints
             }
 
             return Results.Ok(guest);
-        });
+        }).Produces<Guest>();
 
-        // add update endpoint
-        endpoints.MapPut("/guests/{id}", async (WeddingContext dbContext, int id, GuestDto guest) =>
+        endpoints.MapGet("/guests/email/{email}", async (WeddingContext dbContext, string email) =>
         {
-            if (id != guest.Id)
+            var guest = await dbContext.Guests.FirstOrDefaultAsync(g => g.Email == email);
+
+            if (guest == null)
             {
-                return Results.BadRequest();
+                return Results.NotFound();
             }
 
-            dbContext.Entry(guest).State = EntityState.Modified;
+            return Results.Ok(guest);
+        }).Produces<Guest>();
+
+        // add update endpoint
+        endpoints.MapPut("/guests/{id}", async (WeddingContext dbContext, int id, UpdateGuestDto guestDto) =>
+        {
+            if (!GuestExists(dbContext, id))
+            {
+                return Results.NotFound("A guest with this ID does not exist.");
+            }
+
+            var updatedGuest = GuestMapper.MapToGuestEntity(guestDto);
+            updatedGuest.Id = id; // Ensure the ID is set correctly
+
+            dbContext.Entry(updatedGuest).State = EntityState.Modified;
 
             try
             {
@@ -95,28 +97,14 @@ public static class WeddingApiEndpoints
         });
 
         // change the post method below to use guestexsists method
-        endpoints.MapPost("/guests", async (WeddingContext dbContext, GuestDto guestDto) =>
+        endpoints.MapPost("/guests", async (WeddingContext dbContext, CreateGuestDto guestDto) =>
         {
-            if (GuestExists(dbContext, guestDto.Id))
-            {
-                return Results.Conflict("A guest with this ID already exists.");
-            }
             var guest = GuestMapper.MapToGuestEntity(guestDto);
             dbContext.Guests.Add(guest);
             await dbContext.SaveChangesAsync();
             return Results.Created($"/guests/{guest.Id}", guest);
         });
     
-    }
-    // Add the following method: create a new wedding
-    public static void MapCreateWeddingEndpoint(IEndpointRouteBuilder endpoints)
-    {
-        endpoints.MapPost("/wedding", async (WeddingContext dbContext, Wedding wedding) =>
-        {
-            dbContext.Weddings.Add(wedding);
-            await dbContext.SaveChangesAsync();
-            return Results.Created($"/wedding/{wedding.Id}", wedding);
-        });
     }
 
     private static bool GuestExists(WeddingContext dbContext, int id)

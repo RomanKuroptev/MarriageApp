@@ -2,10 +2,9 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { CreateGuestDto } from '../models/CreateGuestDto';
 import type { Guest } from '../models/Guest';
-import type { GuestDto } from '../models/GuestDto';
-import type { RSVP } from '../models/RSVP';
-import type { Wedding } from '../models/Wedding';
+import type { UpdateGuestDto } from '../models/UpdateGuestDto';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
@@ -14,37 +13,10 @@ import { request as __request } from '../core/request';
 export class MarriageApiService {
 
     /**
-     * @returns any Success
+     * @returns Guest Success
      * @throws ApiError
      */
-    public static getWedding(): CancelablePromise<any> {
-        return __request(OpenAPI, {
-            method: 'GET',
-            url: '/wedding',
-        });
-    }
-
-    /**
-     * @param requestBody 
-     * @returns any Success
-     * @throws ApiError
-     */
-    public static postWedding(
-requestBody: Wedding,
-): CancelablePromise<any> {
-        return __request(OpenAPI, {
-            method: 'POST',
-            url: '/wedding',
-            body: requestBody,
-            mediaType: 'application/json',
-        });
-    }
-
-    /**
-     * @returns any Success
-     * @throws ApiError
-     */
-    public static getGuests(): CancelablePromise<any> {
+    public static getGuests(): CancelablePromise<Array<Guest>> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/guests',
@@ -57,7 +29,7 @@ requestBody: Wedding,
      * @throws ApiError
      */
     public static postGuests(
-requestBody: GuestDto,
+requestBody: CreateGuestDto,
 ): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
@@ -69,12 +41,12 @@ requestBody: GuestDto,
 
     /**
      * @param id 
-     * @returns any Success
+     * @returns Guest Success
      * @throws ApiError
      */
     public static getGuests1(
 id: number,
-): CancelablePromise<any> {
+): CancelablePromise<Guest> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/guests/{id}',
@@ -92,7 +64,7 @@ id: number,
      */
     public static putGuests(
 id: number,
-requestBody: Guest,
+requestBody: UpdateGuestDto,
 ): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'PUT',
@@ -124,12 +96,12 @@ id: number,
 
     /**
      * @param rsvpCode 
-     * @returns any Success
+     * @returns Guest Success
      * @throws ApiError
      */
     public static getGuestsRsvp(
 rsvpCode: string,
-): CancelablePromise<any> {
+): CancelablePromise<Guest> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/guests/rsvp/{rsvpCode}',
@@ -140,18 +112,19 @@ rsvpCode: string,
     }
 
     /**
-     * @param requestBody 
-     * @returns any Success
+     * @param email 
+     * @returns Guest Success
      * @throws ApiError
      */
-    public static postRsvp(
-requestBody: RSVP,
-): CancelablePromise<any> {
+    public static getGuestsEmail(
+email: string,
+): CancelablePromise<Guest> {
         return __request(OpenAPI, {
-            method: 'POST',
-            url: '/rsvp',
-            body: requestBody,
-            mediaType: 'application/json',
+            method: 'GET',
+            url: '/guests/email/{email}',
+            path: {
+                'email': email,
+            },
         });
     }
 

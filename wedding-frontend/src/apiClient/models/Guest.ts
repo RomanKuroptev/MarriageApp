@@ -7,6 +7,7 @@ export type Guest = {
     id?: number;
     name?: string | null;
     email?: string | null;
-    isAttending?: boolean;
+    foodPreference?: string | null;
+    isAttending?: boolean | null;
     rsvpCode?: string | null;
 };

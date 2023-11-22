@@ -9,5 +9,4 @@ public class WeddingContext : DbContext
     }
 
     public DbSet<Guest> Guests { get; set; }
-    public DbSet<Wedding> Weddings { get; set; }
 }

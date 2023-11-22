@@ -5,6 +5,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+console.log('BASE_URL:', process.env.BASE_URL);
+// Rest of your application code...
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );

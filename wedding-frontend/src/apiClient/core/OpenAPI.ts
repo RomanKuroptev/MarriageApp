@@ -20,7 +20,7 @@ export type OpenAPIConfig = {
 };
 
 export const OpenAPI: OpenAPIConfig = {
-    BASE: 'http://localhost:8080',
+    BASE: process.env.REACT_APP_BASE_URL || '',
     VERSION: '1',
     WITH_CREDENTIALS: false,
     CREDENTIALS: 'include',

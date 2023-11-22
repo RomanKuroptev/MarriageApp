@@ -40,6 +40,34 @@
   margin: 0 auto;
 }
 
+.info-link {
+  color: #008CBA; /* Blue */
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 16px;
+  margin: 4px 2px;
+  background: none; /* Reset background */
+  border: none; /* Reset border */
+  padding: 0; /* Reset padding */
+  display: inline; /* Ensure it's not a block element */
+}
+
+.info-link:hover {
+  color: #4CAF50; /* Green */
+}
+
+.guest-link {
+  color: #008CBA; /* Blue */
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 16px;
+  margin: 4px 2px;
+}
+
+.guest-link:hover {
+  color: #4CAF50; /* Green */
+}
+
 @media (max-width: 600px) {
 .card {
   width: 90%;

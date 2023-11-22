@@ -40,15 +40,23 @@ app.UseSwagger();
 
 // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
 // specifying the Swagger JSON endpoint
+var swaggerRouteTemplate = builder.Configuration.GetSection("Swagger:RouteTemplate").Value;
+
+// ...
+
+app.UseSwagger(c =>
+{
+    c.RouteTemplate = swaggerRouteTemplate;
+});
+
+var swaggerEndpoint = builder.Configuration.GetSection("Swagger:Endpoint").Value;
 app.UseSwaggerUI(c =>
 {
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+    c.SwaggerEndpoint(swaggerEndpoint, "My API V1");
 });
 
 // Use CORS policy
 app.UseCors("AllowAllOrigins");
 
-WeddingApiEndpoints.MapWeddingEndpoint(app);
-WeddingApiEndpoints.MapCreateWeddingEndpoint(app);
 WeddingApiEndpoints.MapGuestsEndpoint(app);
 app.Run();
