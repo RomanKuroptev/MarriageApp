@@ -68,6 +68,50 @@
   color: #4CAF50; /* Green */
 }
 
+.nav {
+  display: flex;
+  justify-content: space-around;
+  background-color: rgba(220, 200, 150, 0.9);
+  padding: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.nav ul {
+  display: flex;
+  list-style-type: none;
+  padding: 0;
+}
+
+.nav li {
+  margin: 0 10px;
+}
+
+.nav a, .nav button {
+  color: #333; /* Dark text for contrast */
+  text-decoration: none;
+  font-size: 2em; /* Larger font size */
+  padding: 15px 25px; /* More padding */
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.nav a.active, .nav button.active {
+  color: #008CBA; /* Highlight active page */
+  border-bottom: 2px solid #008CBA; /* Underline active page */
+}
+
+.nav-link {
+  font-family: 'Tangerine', cursive;
+  color: #000000;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+.nav a:hover, .nav button:hover {
+  background-color: #ddd; /* Hover effect */
+  color: #008CBA;
+}
+
 @media (max-width: 600px) {
 .card {
   width: 90%;

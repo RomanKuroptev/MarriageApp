@@ -19,8 +19,12 @@ public static class GuestMapper
             Id = guestDto.Id,
             Name = guestDto.Name,
             Email = guestDto.Email,
-            IsAttending = guestDto.IsAttending,
-            FoodPreference = guestDto.FoodPreference,
+            Allergy1 = guestDto.Allergy1,
+            Allergy2 = guestDto.Allergy2,
+            IsAttending1 = guestDto.IsAttending1,
+            IsAttending2 = guestDto.IsAttending2,
+            FoodPreference1 = guestDto.FoodPreference1,
+            FoodPreference2 = guestDto.FoodPreference2,
             RSVPCode =guestDto.RSVPCode
         };
     }

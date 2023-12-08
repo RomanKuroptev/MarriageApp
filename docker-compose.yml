@@ -71,6 +71,17 @@ services:
       - CHOKIDAR_USEPOLLING=true
       - REACT_APP_BASE_URL=http://localhost:8080
 
+  wedding-frontend-prod:
+    image: ghcr.io/romankuroptev/marriageapp-wedding-frontend-prod:latest
+    build:
+      context: ./wedding-frontend
+      dockerfile: Dockerfile.prod
+      args:
+        - REACT_APP_BASE_URL=https://romanochrebecca2024.se/api
+    networks:
+      - mynetwork
+    ports:
+      - "3001:3000"
 networks:
   mynetwork:
 

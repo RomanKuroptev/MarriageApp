@@ -40,14 +40,14 @@ function SignupPage() {
         id: guest.id,
         name: guest.name ?? '',
         email: email,
-        isAttending: guest.isAttending || false,
+        isAttending1: guest.isAttending1 || false,
         rsvpCode: guest.rsvpCode ?? '',
-        foodPreference: guest.foodPreference ?? '',
+        foodPreference1: guest.foodPreference1 ?? '',
       };
 
       try {
         const response = await MarriageApiService.putGuests(updatedGuest.id ?? 0, updatedGuest);
-        navigate(`/guest/${updatedGuest.rsvpCode}`);
+        navigate(`/`);
       } catch (error) {
         console.error(error);
       }

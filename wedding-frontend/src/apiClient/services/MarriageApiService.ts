@@ -4,6 +4,7 @@
 /* eslint-disable */
 import type { CreateGuestDto } from '../models/CreateGuestDto';
 import type { Guest } from '../models/Guest';
+import type { LoginRequest } from '../models/LoginRequest';
 import type { UpdateGuestDto } from '../models/UpdateGuestDto';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -11,6 +12,22 @@ import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
 
 export class MarriageApiService {
+
+    /**
+     * @param requestBody 
+     * @returns any Success
+     * @throws ApiError
+     */
+    public static postLogin(
+requestBody: LoginRequest,
+): CancelablePromise<any> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/login',
+            body: requestBody,
+            mediaType: 'application/json',
+        });
+    }
 
     /**
      * @returns Guest Success

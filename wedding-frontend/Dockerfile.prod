@@ -1,0 +1,19 @@
+# Build stage
+FROM node:14 as build
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+ARG REACT_APP_BASE_URL
+ENV REACT_APP_BASE_URL=$REACT_APP_BASE_URL
+
+RUN npm run build
+
+# Install serve and serve the application
+RUN npm install -g serve
+CMD ["serve", "-s", "build"]

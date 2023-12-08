@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarriageAPI", "MarriageAPI\MarriageAPI.csproj", "{2D25FFA5-1614-4224-A2C3-1166AF744E61}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MarriageAPI", "MarriageAPI\MarriageAPI.csproj", "{2D25FFA5-1614-4224-A2C3-1166AF744E61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jwtkeygenerator", "jwtkeygenerator\Jwtkeygenerator.csproj", "{19732454-85C6-4DB2-B462-31FE467697EB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{2D25FFA5-1614-4224-A2C3-1166AF744E61}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D25FFA5-1614-4224-A2C3-1166AF744E61}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D25FFA5-1614-4224-A2C3-1166AF744E61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19732454-85C6-4DB2-B462-31FE467697EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19732454-85C6-4DB2-B462-31FE467697EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19732454-85C6-4DB2-B462-31FE467697EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19732454-85C6-4DB2-B462-31FE467697EB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

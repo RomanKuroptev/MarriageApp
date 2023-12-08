@@ -9,6 +9,7 @@ export type { OpenAPIConfig } from './core/OpenAPI';
 
 export type { CreateGuestDto } from './models/CreateGuestDto';
 export type { Guest } from './models/Guest';
+export type { LoginRequest } from './models/LoginRequest';
 export type { UpdateGuestDto } from './models/UpdateGuestDto';
 
 export { MarriageApiService } from './services/MarriageApiService';
